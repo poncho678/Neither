@@ -1,0 +1,18 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Helvetica, sans-serif;
+  font-size: 5rem;
+  font-weight: 100;
+  letter-spacing: 0.01em;
+  padding: 1rem;
+  line-height: 0.95em;
+}
+
+canvas {
+  display: none;
+}
