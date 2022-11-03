@@ -88,7 +88,11 @@ const scrollToBottom = () => {
   const pageBottom = document.body.scrollHeight;
   const windowHeight = document.documentElement.clientHeight;
 
-  if (currentScrollPosition >= pageBottom - windowHeight - 100) {
+  if (
+    currentScrollPosition >= pageBottom - windowHeight - 100 &&
+    currentScrollPosition <= pageBottom - windowHeight - 5
+  ) {
+    console.log("runs");
     window.scrollTo({
       top: pageBottom,
       left: 0,
