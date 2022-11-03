@@ -135,7 +135,6 @@ function draw() {
       getLastLetter.toLowerCase() === label.toLowerCase() &&
       getSecondToLastLetter.toLowerCase() === label.toLowerCase()
     ) {
-      console.log("its the same agaiiiin");
       return;
     }
 
@@ -171,7 +170,13 @@ function draw() {
       textWrapper.innerHTML += label.toLowerCase();
       scrollToBottom();
     } else {
-      textWrapper.innerHTML += label;
+      if (label.length > 1) {
+        textWrapper.innerHTML += `${label.charAt(0).toUpperCase()} + ${label
+          .slice(1)
+          .toLowerCase()}`;
+      } else {
+        textWrapper.innerHTML += label;
+      }
       scrollToBottom();
     }
   }
