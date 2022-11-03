@@ -4,13 +4,32 @@
   box-sizing: border-box;
 }
 
+:root {
+  --color-background: #ffffff;
+  --text-color: #000000;
+  --spacer-s: 1rem;
+}
+
 body {
   font-family: Helvetica, sans-serif;
   font-size: 5rem;
   font-weight: 100;
   letter-spacing: 0.01em;
-  padding: 1rem;
   line-height: 0.95em;
+  background-color: var(--color-background);
+  color: var(--text-color);
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  background-color: var(--color-background);
+  color: var(--text-color);
+}
+
+nav,
+#text-wrapper {
+  padding: var(--spacer-s);
 }
 
 canvas {
