@@ -111,7 +111,6 @@ function draw() {
           getLastLetter !== undefined &&
           lastWordInText.length >= currentMinWordLengthValue
         ) {
-          console.log("y");
           textWrapper.innerHTML += " ";
         }
       }
