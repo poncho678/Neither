@@ -103,7 +103,6 @@ const scrollToBottom = () => {
     currentScrollPosition >= pageBottom - windowHeight - 100 &&
     currentScrollPosition <= pageBottom - windowHeight - 5
   ) {
-    console.log("runs");
     window.scrollTo({
       top: pageBottom,
       left: 0,
@@ -128,6 +127,17 @@ function draw() {
 
     const getLastLetter =
       textWrapper.innerHTML[textWrapper.innerHTML.length - 1];
+    const getSecondToLastLetter =
+      textWrapper.innerHTML[textWrapper.innerHTML.length - 2];
+
+    if (
+      getLastLetter !== undefined &&
+      getLastLetter.toLowerCase() === label.toLowerCase() &&
+      getSecondToLastLetter.toLowerCase() === label.toLowerCase()
+    ) {
+      console.log("its the same agaiiiin");
+      return;
+    }
 
     // Check if label is a possible Value, if its not a letter, run this function
     if (!listOfOptions.includes(label)) {
