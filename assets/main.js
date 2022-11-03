@@ -171,7 +171,7 @@ function draw() {
       scrollToBottom();
     } else {
       if (label.length > 1) {
-        textWrapper.innerHTML += `${label.charAt(0).toUpperCase()} + ${label
+        textWrapper.innerHTML += `${label.charAt(0).toUpperCase()}${label
           .slice(1)
           .toLowerCase()}`;
       } else {
