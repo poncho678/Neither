@@ -133,6 +133,7 @@ function draw() {
     if (
       getLastLetter !== undefined &&
       getLastLetter.toLowerCase() === label.toLowerCase() &&
+      getSecondToLastLetter !== undefined &&
       getSecondToLastLetter.toLowerCase() === label.toLowerCase()
     ) {
       return;
@@ -171,6 +172,10 @@ function draw() {
       scrollToBottom();
     } else {
       if (label.length > 1) {
+        console.log(
+          label,
+          `${label.charAt(0).toUpperCase()}${label.slice(1).toLowerCase()}`
+        );
         textWrapper.innerHTML += `${label.charAt(0).toUpperCase()}${label
           .slice(1)
           .toLowerCase()}`;
