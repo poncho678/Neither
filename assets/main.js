@@ -1,4 +1,13 @@
-// TODO: Range Slider
+function addSpaceAfterInput() {
+  const textWrapper = document.getElementById("text-wrapper");
+  const lastLetter = textWrapper.innerHTML[textWrapper.innerHTML.length - 1];
+
+  if (lastLetter !== " ") {
+    textWrapper.innerHTML += " ";
+  }
+}
+
+// Min Values
 // Min Values
 const minWordLength = document.getElementById("minWordLength");
 const minWordLengthValue = document.getElementById("minWordLengthValue");
@@ -18,6 +27,7 @@ minWordLength.oninput = (e) => {
   currentMinWordLengthValue = parseInt(value);
   minWordLengthValue.innerHTML = value;
   maxWordLength.setAttribute("min", value);
+  addSpaceAfterInput();
 };
 
 maxWordLength.oninput = (e) => {
@@ -25,6 +35,7 @@ maxWordLength.oninput = (e) => {
   currentMaxWordLengthValue = parseInt(value);
   maxWordLengthValue.innerHTML = value;
   minWordLength.setAttribute("max", value);
+  addSpaceAfterInput();
 };
 
 // Global variable to store the classifier
