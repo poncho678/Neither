@@ -64,7 +64,6 @@ const listOfOptions = [
 ];
 
 // Teachable Machine model URL:
-// let soundModel = "https://teachablemachine.withgoogle.com/models/bTrLmhQPj/";
 let soundModel = "https://teachablemachine.withgoogle.com/models/9k5qv7zbs/";
 
 let lettersArray = [];
@@ -84,6 +83,20 @@ const resetCount = () => {
   noSoundCount = 0;
 };
 
+const scrollToBottom = () => {
+  const currentScrollPosition = window.pageYOffset;
+  const pageBottom = document.body.scrollHeight;
+  const windowHeight = document.documentElement.clientHeight;
+
+  if (currentScrollPosition >= pageBottom - windowHeight - 100) {
+    window.scrollTo({
+      top: pageBottom,
+      left: 0,
+      behavior: "smooth",
+    });
+  }
+};
+
 function draw() {
   if (frameCount % 30 === 0) {
     let textWrapper = document.getElementById("text-wrapper");
@@ -101,6 +114,7 @@ function draw() {
     const getLastLetter =
       textWrapper.innerHTML[textWrapper.innerHTML.length - 1];
 
+    // Check if label is a possible Value, if its not a letter, run this function
     if (!listOfOptions.includes(label)) {
       noSoundCount++;
 
@@ -130,8 +144,10 @@ function draw() {
         return;
       }
       textWrapper.innerHTML += label.toLowerCase();
+      scrollToBottom();
     } else {
       textWrapper.innerHTML += label;
+      scrollToBottom();
     }
   }
 }
