@@ -1,3 +1,6 @@
+// TODO: localStorage
+// TODO: If Th is final character in a word, it might exceed word length. FIX
+
 function addSpaceAfterInput() {
   const textWrapper = document.getElementById("text-wrapper");
   const lastLetter = textWrapper.innerHTML[textWrapper.innerHTML.length - 1];
@@ -119,10 +122,17 @@ function draw() {
     const [lastWordInText] = textWrapper.innerText.split(" ").slice(-1);
 
     if (
-      lastWordInText.length === currentMaxWordLengthValue &&
+      lastWordInText.length >= currentMaxWordLengthValue &&
       lastWordInText.length >= currentMinWordLengthValue
     ) {
       textWrapper.innerHTML += " ";
+    }
+
+    if (label.length > 1) {
+      if (lastWordInText + label > currentMaxWordLengthValue) {
+        textWrapper.innerHTML += `${label[0]} ${label[1]}`;
+        return;
+      }
     }
 
     const getLastLetter =
@@ -191,6 +201,14 @@ function draw() {
 function gotResult(error, results) {
   if (error) {
     console.error(error);
+    return;
+  }
+
+  if (
+    !listOfOptions.includes(results[0].label) &&
+    results[1].confidence >= 0.15
+  ) {
+    label = results[1].label;
     return;
   }
 
