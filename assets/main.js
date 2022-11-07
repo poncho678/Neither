@@ -206,7 +206,7 @@ function gotResult(error, results) {
 
   if (
     !listOfOptions.includes(results[0].label) &&
-    results[1].confidence >= 0.2
+    results[1].confidence >= 0.175
   ) {
     label = results[1].label;
     return;
