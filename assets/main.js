@@ -181,7 +181,7 @@ function draw() {
         return;
       }
 
-      if (lastWordInText.length >= 1 && getLastLetter !== " ") {
+      if (lastWordInText.length > 0 && getLastLetter !== " ") {
         console.log(
           "Last letter is not a space, and there is a previous word. Return lowercase letter ->",
           lastWordInText
@@ -190,7 +190,11 @@ function draw() {
         scrollToBottom();
         return;
       }
-      console.log("Nothing special. Return uppercase character ->", character);
+
+      console.log(
+        "Nothing special. Return uppercase or character ->",
+        character
+      );
       textWrapper.innerHTML += character.toUpperCase();
       scrollToBottom();
       return;
@@ -207,7 +211,7 @@ function gotResult(error, results) {
 
   if (
     !listOfOptions.includes(results[0].label) &&
-    results[1].confidence >= 0.175
+    results[1].confidence >= 0.25
   ) {
     label = results[1].label;
     return;
