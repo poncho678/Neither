@@ -50,9 +50,19 @@ let text = "";
 const listOfOptions = [
   "A",
   "B",
+  "BO",
+  "BE",
   "C",
+  "CHA",
+  "CHO",
+  "CHU",
   "D",
+  "DA",
+  "DE",
+  "DO",
   "E",
+  "EA",
+  "EY",
   "F",
   "G",
   "H",
@@ -62,18 +72,38 @@ const listOfOptions = [
   "L",
   "M",
   "N",
+  "NE",
+  "NI",
+  "NO",
   "O",
+  "OU",
   "P",
   "Q",
   "R",
+  "RA",
+  "RE",
+  "RU",
   "S",
+  "SE",
+  "SO",
+  "SH",
+  "SHA",
+  "SHO",
+  "SHU",
   "T",
+  "TA",
+  "TE",
   "TH",
+  "THE",
+  "TO",
   "U",
   "V",
   "W",
+  "WE",
+  "WO",
   "X",
   "Y",
+  "YE",
   "Z",
 ];
 
@@ -120,7 +150,6 @@ function draw() {
 
     // If length of last word exceeds specific length insert a space.
     let [lastWordInText] = textWrapper.innerText.split(" ").slice(-1);
-
     const getLastLetter =
       textWrapper.innerHTML[textWrapper.innerHTML.length - 1];
 
@@ -177,7 +206,6 @@ function draw() {
           textWrapper.innerHTML += ` ${character.toLowerCase()}`;
         }
         scrollToBottom();
-
         return;
       }
 
