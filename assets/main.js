@@ -152,6 +152,18 @@ function draw() {
         return;
       }
       if (
+        lastWordInText.length > 1 &&
+        lastWordInText
+          .slice(-2)
+          .split("")
+          .every((item) => {
+            return item.toLowerCase() === character.toLowerCase();
+          })
+      ) {
+        console.log(`this would’ve been the third ${character} in a row`);
+        return;
+      }
+      if (
         lastWordInText.length + character.length >
         currentMaxWordLengthValue
       ) {
@@ -159,7 +171,11 @@ function draw() {
           "space inserted, word.length + character.length exceeded character limit. Insert Space and Character ->" +
             character
         );
-        textWrapper.innerHTML += ` ${character}`;
+        if (Math.random() < 0.3) {
+          textWrapper.innerHTML += ` ${character}`;
+        } else {
+          textWrapper.innerHTML += ` ${character.toLowerCase()}`;
+        }
         scrollToBottom();
 
         return;
