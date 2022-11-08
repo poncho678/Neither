@@ -15,14 +15,14 @@ function addSpaceAfterInput() {
 const minWordLength = document.getElementById("minWordLength");
 const minWordLengthValue = document.getElementById("minWordLengthValue");
 document.getElementById("minWordLengthValue").innerHTML =
-  minWordLength.getAttribute("min");
+  minWordLength.getAttribute("value");
 let currentMinWordLengthValue = parseInt(minWordLength.value);
 
 // Max Values
 const maxWordLength = document.getElementById("maxWordLength");
 const maxWordLengthValue = document.getElementById("maxWordLengthValue");
 document.getElementById("maxWordLengthValue").innerHTML =
-  maxWordLength.getAttribute("max");
+  maxWordLength.getAttribute("value");
 let currentMaxWordLengthValue = parseInt(maxWordLength.value);
 
 minWordLength.oninput = (e) => {
@@ -119,40 +119,14 @@ function draw() {
     let textWrapper = document.getElementById("text-wrapper");
 
     // If length of last word exceeds specific length insert a space.
-    const [lastWordInText] = textWrapper.innerText.split(" ").slice(-1);
-
-    if (
-      lastWordInText.length >= currentMaxWordLengthValue &&
-      lastWordInText.length >= currentMinWordLengthValue
-    ) {
-      textWrapper.innerHTML += " ";
-    }
-
-    if (label.length > 1) {
-      if (lastWordInText + label > currentMaxWordLengthValue) {
-        textWrapper.innerHTML += `${label[0]} ${label[1]}`;
-        return;
-      }
-    }
+    let [lastWordInText] = textWrapper.innerText.split(" ").slice(-1);
 
     const getLastLetter =
       textWrapper.innerHTML[textWrapper.innerHTML.length - 1];
-    const getSecondToLastLetter =
-      textWrapper.innerHTML[textWrapper.innerHTML.length - 2];
 
-    if (
-      getLastLetter !== undefined &&
-      getLastLetter.toLowerCase() === label.toLowerCase() &&
-      getSecondToLastLetter !== undefined &&
-      getSecondToLastLetter.toLowerCase() === label.toLowerCase()
-    ) {
-      return;
-    }
-
-    // Check if label is a possible Value, if its not a letter, run this function
+    // Check if label is a possible Value
     if (!listOfOptions.includes(label)) {
       noSoundCount++;
-
       // if no Sound has been recorded enter a space, but only if min word length is exceedded
       if (noSoundCount === 3) {
         if (
@@ -160,6 +134,9 @@ function draw() {
           getLastLetter !== undefined &&
           lastWordInText.length >= currentMinWordLengthValue
         ) {
+          console.log(
+            "insert space, no sound was recognized and the last word has already exceeded the min word length. Inserting Space"
+          );
           textWrapper.innerHTML += " ";
         }
       }
@@ -167,33 +144,41 @@ function draw() {
     }
     resetCount();
 
-    // TODO: if previous letter was Uppercase. Add the new character as lowercase
-    if (
-      getLastLetter !== " " &&
-      ((getLastLetter !== undefined &&
-        getLastLetter === getLastLetter.toUpperCase()) ||
-        (getLastLetter !== undefined &&
-          getLastLetter === getLastLetter.toLowerCase()))
-    ) {
-      if (label === " ") {
+    label.split("").map((character) => {
+      [lastWordInText] = textWrapper.innerText.split(" ").slice(-1);
+      if (lastWordInText.length === 0) {
+        console.log("first character ->", character);
+        textWrapper.innerHTML += character;
         return;
       }
-      textWrapper.innerHTML += label.toLowerCase();
-      scrollToBottom();
-    } else {
-      if (label.length > 1) {
+      if (
+        lastWordInText.length + character.length >
+        currentMaxWordLengthValue
+      ) {
         console.log(
-          label,
-          `${label.charAt(0).toUpperCase()}${label.slice(1).toLowerCase()}`
+          "space inserted, word.length + character.length exceeded character limit. Insert Space and Character ->" +
+            character
         );
-        textWrapper.innerHTML += `${label.charAt(0).toUpperCase()}${label
-          .slice(1)
-          .toLowerCase()}`;
-      } else {
-        textWrapper.innerHTML += label;
+        textWrapper.innerHTML += ` ${character}`;
+        scrollToBottom();
+
+        return;
       }
+
+      if (lastWordInText.length >= 1 && getLastLetter !== " ") {
+        console.log(
+          "Last letter is not a space, and there is a previous word. Return lowercase letter ->",
+          lastWordInText
+        );
+        textWrapper.innerHTML += character.toLowerCase();
+        scrollToBottom();
+        return;
+      }
+      console.log("Nothing special. Return uppercase character ->", character);
+      textWrapper.innerHTML += character.toUpperCase();
       scrollToBottom();
-    }
+      return;
+    });
   }
 }
 
