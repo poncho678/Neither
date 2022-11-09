@@ -10,6 +10,7 @@ function addSpaceAfterInput() {
   }
 }
 
+// c
 // Min Values
 // Min Values
 const minWordLength = document.getElementById("minWordLength");
