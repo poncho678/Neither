@@ -10,7 +10,6 @@ function addSpaceAfterInput() {
   }
 }
 
-// c
 // Min Values
 // Min Values
 const minWordLength = document.getElementById("minWordLength");
@@ -165,7 +164,7 @@ function draw() {
           lastWordInText.length >= currentMinWordLengthValue
         ) {
           console.log(
-            "insert space, no sound was recognized and the last word has already exceeded the min word length. Inserting Space"
+            "no sound -> inserting space"
           );
           textWrapper.innerHTML += " ";
         }
@@ -190,7 +189,7 @@ function draw() {
             return item.toLowerCase() === character.toLowerCase();
           })
       ) {
-        console.log(`this would’ve been the third ${character} in a row`);
+        console.log(`this would’ve been the third "${character}" in a row -> skip`);
         return;
       }
       if (
@@ -198,7 +197,7 @@ function draw() {
         currentMaxWordLengthValue
       ) {
         console.log(
-          "space inserted, word.length + character.length exceeded character limit. Insert Space and Character ->" +
+          "Insert Space + Character ->" +
             character
         );
         if (Math.random() < 0.3) {
@@ -212,8 +211,8 @@ function draw() {
 
       if (lastWordInText.length > 0 && getLastLetter !== " ") {
         console.log(
-          "Last letter is not a space, and there is a previous word. Return lowercase letter ->",
-          lastWordInText
+          "Return lowercase letter ->",
+          character.toLowerCase()
         );
         textWrapper.innerHTML += character.toLowerCase();
         scrollToBottom();
@@ -221,7 +220,7 @@ function draw() {
       }
 
       console.log(
-        "Nothing special. Return uppercase or character ->",
+        "Return uppercase character ->",
         character
       );
       textWrapper.innerHTML += character.toUpperCase();
