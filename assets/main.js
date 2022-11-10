@@ -44,7 +44,6 @@ maxWordLength.oninput = (e) => {
 // Global variable to store the classifier
 let classifier;
 
-// Label
 let label = "";
 let text = "";
 const listOfOptions = [
@@ -110,15 +109,11 @@ const listOfOptions = [
 // Teachable Machine model URL:
 let soundModel = "https://teachablemachine.withgoogle.com/models/9k5qv7zbs/";
 
-let lettersArray = [];
-
 function preload() {
-  // Load the model
   classifier = ml5.soundClassifier(soundModel + "model.json");
 }
 
 function setup() {
-  // The sound model will continuously listen to the microphone
   classifier.classify(gotResult);
 }
 
