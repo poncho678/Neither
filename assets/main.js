@@ -175,6 +175,30 @@ function draw() {
         return;
       }
       if (
+        textWrapper.innerText
+          .toLowerCase()
+          .split("")
+          .filter((character) => character !== " ")
+          .slice(label.length * 3 * -1)
+          .join("")
+          .split(`${label.toLowerCase()}`).length -
+          1 >=
+        2
+      ) {
+        console.log(
+          textWrapper.innerText
+            .toLowerCase()
+            .split("")
+            .filter((character) => character !== " ")
+            .slice(label.length * 3 * -1)
+            .join("")
+            .split(`${label.toLowerCase()}`)
+        );
+        console.log(`skip, too many occurences of ${label}`);
+        return;
+      }
+
+      if (
         lastWordInText.length > 1 &&
         lastWordInText
           .slice(-2)
