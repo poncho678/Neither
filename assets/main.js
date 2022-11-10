@@ -150,8 +150,7 @@ function draw() {
 
     // If length of last word exceeds specific length insert a space.
     let [lastWordInText] = textWrapper.innerText.split(" ").slice(-1);
-    const getLastLetter =
-      textWrapper.innerHTML[textWrapper.innerHTML.length - 1];
+    let getLastLetter = textWrapper.innerHTML[textWrapper.innerHTML.length - 1];
 
     // Check if label is a possible Value
     if (!listOfOptions.includes(label)) {
@@ -163,9 +162,7 @@ function draw() {
           getLastLetter !== undefined &&
           lastWordInText.length >= currentMinWordLengthValue
         ) {
-          console.log(
-            "insert space, no sound was recognized and the last word has already exceeded the min word length. Inserting Space"
-          );
+          console.log("Inserting Space");
           textWrapper.innerHTML += " ";
         }
       }
@@ -175,6 +172,8 @@ function draw() {
 
     label.split("").map((character) => {
       [lastWordInText] = textWrapper.innerText.split(" ").slice(-1);
+      getLastLetter = textWrapper.innerHTML[textWrapper.innerHTML.length - 1];
+
       if (lastWordInText.length === 0) {
         console.log("first character ->", character);
         textWrapper.innerHTML += character;
@@ -196,10 +195,7 @@ function draw() {
         lastWordInText.length + character.length >
         currentMaxWordLengthValue
       ) {
-        console.log(
-          "space inserted, word.length + character.length exceeded character limit. Insert Space and Character ->" +
-            character
-        );
+        console.log("Insert Space and Character -> " + character);
         if (Math.random() < 0.3) {
           textWrapper.innerHTML += ` ${character}`;
         } else {
@@ -210,19 +206,13 @@ function draw() {
       }
 
       if (lastWordInText.length > 0 && getLastLetter !== " ") {
-        console.log(
-          "Last letter is not a space, and there is a previous word. Return lowercase letter ->",
-          lastWordInText
-        );
+        console.log("Return lowercase letter ->", lastWordInText);
         textWrapper.innerHTML += character.toLowerCase();
         scrollToBottom();
         return;
       }
 
-      console.log(
-        "Nothing special. Return uppercase or character ->",
-        character
-      );
+      console.log("Return uppercase character ->" + character);
       textWrapper.innerHTML += character.toUpperCase();
       scrollToBottom();
       return;
@@ -230,7 +220,6 @@ function draw() {
   }
 }
 
-// The model recognizing a sound will trigger this event
 function gotResult(error, results) {
   if (error) {
     console.error(error);
@@ -239,12 +228,11 @@ function gotResult(error, results) {
 
   if (
     !listOfOptions.includes(results[0].label) &&
-    results[1].confidence >= 0.25
+    results[1].confidence >= 0.35
   ) {
     label = results[1].label;
     return;
   }
 
-  // The results are in an array ordered by confidence.
   label = !listOfOptions.includes(results[0].label) ? " " : results[0].label;
 }
